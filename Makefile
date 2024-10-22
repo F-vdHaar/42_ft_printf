@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+         #
+#    By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/28 04:26:53 by fvon-der          #+#    #+#              #
-#    Updated: 2024/10/14 18:45:17 by fvon-der         ###   ########.fr        #
+#    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
+#    Updated: 2024/10/22 10:42:25 by fvon-de          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,47 +18,50 @@ GREEN       = \033[0;92m
 RED         = \033[1;31m
 
 # Project settings
-CC = 			cc
-CFLAGS = -Wall -Wextra -Werror -Wunused
+NAME        = libftprintf.a
+INCLUDE     = include
+LIBFT       = ../libft
+CC			= cc
+CFLAGS 		= -Wall -Wextra -Werror -Wunused -I$(INCLUDE)
 DEBUG_FLAGS = -g -O0 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -fno-strict-aliasing -fno-omit-frame-pointer -fstack-protector -DDEBUG -fno-inline
+AR          = ar rcs
+MAKE        = make
+
  # Default version if not specified
-VERSION ?= v3
+VERSION ?= v1
 SRC_DIR = src/$(VERSION)
 OBJ_DIR = obj/$(VERSION)
-NAME_SERVER = server
-NAME_CLIENT = client
 
 # Source files
-SRCS_SERVER = $(SRC_DIR)/$(VERSION)_server.c $(SRC_DIR)/$(VERSION)_utils.c
-SRCS_CLIENT = $(SRC_DIR)/$(VERSION)_client.c $(SRC_DIR)/$(VERSION)_utils.c
+SRCS = $(SRC_DIR)/ft_printf.c \
 
 # Object files
-OBJS_SERVER = $(OBJ_DIR)/$(VERSION)_server.o $(OBJ_DIR)/$(VERSION)_utils.o
-OBJS_CLIENT = $(OBJ_DIR)/$(VERSION)_client.o $(OBJ_DIR)/$(VERSION)_utils.o
+OBJS = $(OBJS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Ensure object directory exists
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-# Default rule to build server and client
-all: $(NAME_SERVER) $(NAME_CLIENT)
+# Default rule to build 
+all: $(NAME)
 
-# Server build rule
-$(NAME_SERVER): $(OBJ_DIR) $(OBJS_SERVER)
-	@echo "$(YELLOW)Compiling $(NAME_SERVER)...$(RESET_COLOR)"
-	$(CC) $(CFLAGS) $(OBJS_SERVER) -o $(NAME_SERVER)
-	@echo "$(GREEN)$(NAME_SERVER) compilation successful!$(RESET_COLOR)"
-
-# Client build rule
-$(NAME_CLIENT): $(OBJ_DIR) $(OBJS_CLIENT)
-	@echo "$(YELLOW)Compiling $(NAME_CLIENT)...$(RESET_COLOR)"
-	$(CC) $(CFLAGS) $(OBJS_CLIENT) -o $(NAME_CLIENT)
-	@echo "$(GREEN)$(NAME_CLIENT) compilation successful!$(RESET_COLOR)"
+#  build rule
+$(NAME): $(OBJ_DIR) $(OBJS)
+	@echo "$(YELLOW)Creating library $(NAME)...$(RESET_COLOR)"
+	@$(AR) $(NAME) $(OBJS) $(LIBFT)/libft.a
+	@echo "$(GREEN)$(NAME) creation finished!$(RESET_COLOR)"
 
 # Rule to compile .o files from .c files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# Make LIBFT
+$(LIBFT)/libft.a:
+	@$(MAKE) -C $(LIBFT)
+
+# bonus target
+# TODO Implmente bonus.
+bonus: all
 
 # Clean object files
 clean:
@@ -67,9 +70,10 @@ clean:
 	@echo "$(GREEN)Object files cleaned!$(RESET_COLOR)"
 
 # Clean everything
-fclean: clean
+fclean: clean 
 	@echo "$(BLUE)Removing executables...$(RESET_COLOR)"
-	rm -f $(NAME_SERVER) $(NAME_CLIENT)
+	@rm -f $(NAME)
+	@$(MAKE) fclean -C $(LIBFT)
 	@echo "$(GREEN)Executables removed!$(RESET_COLOR)"
 
 # Rebuild everything
@@ -78,26 +82,27 @@ re: fclean all
 # Norminette target
 norm:
 	@echo "$(BLUE)Running Norminette...$(RESET_COLOR)"
-	norminette $(SRCS_SERVER) $(SRCS_CLIENT)
+	norminette $(SRCS)
 	@echo "$(GREEN)Norminette check complete!$(RESET_COLOR)"
 
 
 # Debug target
-debug: clean
-	@echo "$(RED)Compiling in debug mode...$(RESET_COLOR)"
-	$(CC) $(DEBUG_FLAGS) $(SRCS_SERVER) -o $(NAME_SERVER)_debug
-	$(CC) $(DEBUG_FLAGS) $(SRCS_CLIENT) -o $(NAME_CLIENT)_debug
-	@echo "$(GREEN)Debug build complete!$(RESET_COLOR)"
+debug: debug_objs
+	@echo "$(YELLOW)Creating debug library $(NAME)_debug.a...$(RESET_COLOR)"
+	@$(AR) $(NAME)_debug.a $(OBJS)
+	@echo "$(GREEN)Debug library $(NAME)_debug.a created!$(RESET_COLOR)"
 
+debug_objs: $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(DEBUG_CFLAGS) -c $< -o $@
 
 # Version targets for different builds
 v1: 
-	@$(MAKE) VERSION=v1
+ 	@$(MAKE) VERSION=v1
 
-v2: 
-	@$(MAKE) VERSION=v2
+# v2: 
+# 	@$(MAKE) VERSION=v2
 
-v3: 
-	@$(MAKE) VERSION=v3
+# v3: 
+# 	@$(MAKE) VERSION=v3
 
-.PHONY: all clean fclean re norm debug v1 v2 v3
+.PHONY: all clean fclean re norm debug  bonus v1 # v2 v3
