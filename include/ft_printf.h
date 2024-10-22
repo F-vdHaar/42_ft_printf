@@ -6,7 +6,7 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:57:20 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 11:43:58 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/22 12:44:06 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int		ft_print_x(char *nbstr, int n, int is_upper, t_flags flags);
 int		ft_print_hexadec(char *nbstr, int n, int is_upper, t_flags flags);
 // p
 int		ft_print_ptr(unsigned long int n, t_flags flags);
-
+int		ft_print_p(unsigned long int n);
+void	ft_print_adr(unsigned long int n);
 #endif
