@@ -6,7 +6,7 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:48:08 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 11:26:06 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/22 11:31:22 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,13 @@ int	ft_print_arg(char type, va_list args, t_flags flags)
 		count += ft_print_str(va_arg(args, const char *), flags);
     else if (type == 'd' || type == 'i')
 		count += ft_print_number(va_arg(args, int), flags);
+	else if (type == 'x')
+		count += ft_print_hex_low(va_arg(args, unsigned int), flags);
+	else if (type == 'X')
+		count += ft_print_hex_up(va_arg(args, unsigned int), flags);
+	else if (type == 'u')
+		count += ft_print_unsigned(va_arg(args, unsigned int), flags);
+	else if (type == 'p')
+		count += ft_print_ptr((unsigned long int)va_arg(args, void *), flags);
 	return (count);
 }
