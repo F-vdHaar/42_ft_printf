@@ -6,7 +6,7 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:57:20 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 12:47:19 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/22 19:33:32 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "../../libft/include/libft.h" 
+# include "../lib/libft/include/libft.h" 
 
 /* ---------- FLAGS --------------------- */
 typedef struct s_flags
@@ -81,4 +81,8 @@ int		ft_ptr_len(unsigned long int n);
 int		ft_istype(int c);
 int		ft_isspec(int c);
 int		ft_isflag(int c);
+
+/* ---------- FLAG FUNCTIONS ------------ */
+int		ft_pad_width(int total_width, int size, int zero);
+
 #endif
