@@ -6,7 +6,7 @@
 #    By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
-#    Updated: 2024/10/22 10:42:25 by fvon-de          ###   ########.fr        #
+#    Updated: 2024/10/22 13:22:23 by fvon-de          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,37 @@ SRC_DIR = src/$(VERSION)
 OBJ_DIR = obj/$(VERSION)
 
 # Source files
-SRCS = $(SRC_DIR)/ft_printf.c \
+SRC_FILES = \
+    ft_flags.c \
+    ft_print_char.c \
+    ft_print_flag.c \
+    ft_print_hex.c \
+    ft_print_str.c \
+    ft_flags_utils.c \
+    ft_printf.c \
+    ft_printf_utoa.c \
+    ft_print_int.c \
+    ft_print_unsigned.c \
+    ft_nbr_len.c \
+    ft_printf_itoa.c \
+    ft_printf_xtoa.c \
+    ft_print_ptr.c
 
-# Object files
-OBJS = $(OBJS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+# Define object files manually
+OBJS = $(OBJ_DIR)/ft_flags.o \
+       $(OBJ_DIR)/ft_print_char.o \
+       $(OBJ_DIR)/ft_print_flag.o \
+       $(OBJ_DIR)/ft_print_hex.o \
+       $(OBJ_DIR)/ft_print_str.o \
+       $(OBJ_DIR)/ft_flags_utils.o \
+       $(OBJ_DIR)/ft_printf.o \
+       $(OBJ_DIR)/ft_printf_utoa.o \
+       $(OBJ_DIR)/ft_print_int.o \
+       $(OBJ_DIR)/ft_print_unsigned.o \
+       $(OBJ_DIR)/ft_nbr_len.o \
+       $(OBJ_DIR)/ft_printf_itoa.o \
+       $(OBJ_DIR)/ft_printf_xtoa.o \
+       $(OBJ_DIR)/ft_print_ptr.o
 
 # Ensure object directory exists
 $(OBJ_DIR):
@@ -51,9 +78,13 @@ $(NAME): $(OBJ_DIR) $(OBJS)
 	@$(AR) $(NAME) $(OBJS) $(LIBFT)/libft.a
 	@echo "$(GREEN)$(NAME) creation finished!$(RESET_COLOR)"
 
-# Rule to compile .o files from .c files
+# Rule for building normal object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# Rule for building debug object files
+$(OBJ_DIR)/debug_%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(DEBUG_CFLAGS) -c $< -o $@
 
 # Make LIBFT
 $(LIBFT)/libft.a:
@@ -66,7 +97,7 @@ bonus: all
 # Clean object files
 clean:
 	@echo "$(BLUE)Cleaning object files in $(OBJ_DIR)...$(RESET_COLOR)"
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR) $(NAME)_debug.a
 	@echo "$(GREEN)Object files cleaned!$(RESET_COLOR)"
 
 # Clean everything
@@ -85,19 +116,15 @@ norm:
 	norminette $(SRCS)
 	@echo "$(GREEN)Norminette check complete!$(RESET_COLOR)"
 
-
-# Debug target
-debug: debug_objs
+# Debug build target
+debug: $(DEBUG_OBJS)
 	@echo "$(YELLOW)Creating debug library $(NAME)_debug.a...$(RESET_COLOR)"
-	@$(AR) $(NAME)_debug.a $(OBJS)
+	@$(AR) rcs $(NAME)_debug.a $(DEBUG_OBJS)
 	@echo "$(GREEN)Debug library $(NAME)_debug.a created!$(RESET_COLOR)"
-
-debug_objs: $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(DEBUG_CFLAGS) -c $< -o $@
 
 # Version targets for different builds
 v1: 
- 	@$(MAKE) VERSION=v1
+	@$(MAKE) VERSION=v1
 
 # v2: 
 # 	@$(MAKE) VERSION=v2
@@ -105,4 +132,4 @@ v1:
 # v3: 
 # 	@$(MAKE) VERSION=v3
 
-.PHONY: all clean fclean re norm debug  bonus v1 # v2 v3
+.PHONY: all clean fclean re norm debug bonus v1 # v2 v3
