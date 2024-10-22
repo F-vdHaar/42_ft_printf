@@ -6,7 +6,7 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:57:20 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 12:44:06 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/22 12:47:19 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int		ft_print_integer(char *nbstr, int n, t_flags flags);
 int		ft_print_i(char *nbstr, int n, t_flags flags);
 // u
 int		ft_print_unsigned(unsigned int n, t_flags flags);
+int		ft_print_u(char *nbstr, t_flags flags);
+int		ft_print_unint(char *nbstr, t_flags flags);
+//int		ft_int_min_handler(t_flags flags);
 // x, X
 int		ft_print_hex_low(unsigned int n, t_flags flags);
 int		ft_print_hex_up(unsigned int n, t_flags flags);
@@ -68,4 +71,14 @@ int		ft_print_hexadec(char *nbstr, int n, int is_upper, t_flags flags);
 int		ft_print_ptr(unsigned long int n, t_flags flags);
 int		ft_print_p(unsigned long int n);
 void	ft_print_adr(unsigned long int n);
+/* ---------- HELPER FUNCTIONS ---------- */
+char	*ft_printf_itoa(long nb);
+char	*ft_printf_utoa(unsigned int nb);
+char	*ft_printf_xtoa(unsigned long int nb, int is_upper);
+int		ft_unint_len(unsigned int n);
+int		ft_hex_len(unsigned int n);
+int		ft_ptr_len(unsigned long int n);
+int		ft_istype(int c);
+int		ft_isspec(int c);
+int		ft_isflag(int c);
 #endif
