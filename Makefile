@@ -6,7 +6,7 @@
 #    By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
-#    Updated: 2024/10/22 13:22:23 by fvon-de          ###   ########.fr        #
+#    Updated: 2024/10/22 20:40:26 by fvon-de          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RED         = \033[1;31m
 # Project settings
 NAME        = libftprintf.a
 INCLUDE     = include
-LIBFT       = ../libft
+LIBFT       = lib/libft
 CC			= cc
 CFLAGS 		= -Wall -Wextra -Werror -Wunused -I$(INCLUDE)
 DEBUG_FLAGS = -g -O0 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -fno-strict-aliasing -fno-omit-frame-pointer -fstack-protector -DDEBUG -fno-inline
@@ -65,30 +65,47 @@ OBJS = $(OBJ_DIR)/ft_flags.o \
        $(OBJ_DIR)/ft_printf_xtoa.o \
        $(OBJ_DIR)/ft_print_ptr.o
 
+DEBUG_OBJS = $(OBJ_DIR)/debug_ft_flags.o \
+             $(OBJ_DIR)/debug_ft_print_char.o \
+             $(OBJ_DIR)/debug_ft_print_flag.o \
+             $(OBJ_DIR)/debug_ft_print_hex.o \
+             $(OBJ_DIR)/debug_ft_print_str.o \
+             $(OBJ_DIR)/debug_ft_flags_utils.o \
+             $(OBJ_DIR)/debug_ft_printf.o \
+             $(OBJ_DIR)/debug_ft_printf_utoa.o \
+             $(OBJ_DIR)/debug_ft_print_int.o \
+             $(OBJ_DIR)/debug_ft_print_unsigned.o \
+             $(OBJ_DIR)/debug_ft_nbr_len.o \
+             $(OBJ_DIR)/debug_ft_printf_itoa.o \
+             $(OBJ_DIR)/debug_ft_printf_xtoa.o \
+             $(OBJ_DIR)/debug_ft_print_ptr.o
+
+# Default rule to build 
+all: $(LIBFT)/libft.a $(OBJS) $(NAME)
+
 # Ensure object directory exists
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-# Default rule to build 
-all: $(NAME)
+# Ensure libft.a exists
+$(LIBFT)/libft.a:
+	@$(MAKE) -C $(LIBFT)
 
 #  build rule
 $(NAME): $(OBJ_DIR) $(OBJS)
-	@echo "$(YELLOW)Creating library $(NAME)...$(RESET_COLOR)"
+	@echo "$(YELLOW)FT_PRINTF : Creating library $(NAME)...$(RESET_COLOR)"
 	@$(AR) $(NAME) $(OBJS) $(LIBFT)/libft.a
 	@echo "$(GREEN)$(NAME) creation finished!$(RESET_COLOR)"
 
 # Rule for building normal object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(YELLOW)FT_PRINTF : Compiling object file: $< to $@...$(RESET_COLOR)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule for building debug object files
 $(OBJ_DIR)/debug_%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(DEBUG_CFLAGS) -c $< -o $@
-
-# Make LIBFT
-$(LIBFT)/libft.a:
-	@$(MAKE) -C $(LIBFT)
+	@echo "$(YELLOW)FT_PRINTF : Compiling debug object file: $< to $@...$(RESET_COLOR)"
+	@$(CC) $(DEBUG_FLAGS) -c $< -o $@
 
 # bonus target
 # TODO Implmente bonus.
@@ -96,31 +113,29 @@ bonus: all
 
 # Clean object files
 clean:
-	@echo "$(BLUE)Cleaning object files in $(OBJ_DIR)...$(RESET_COLOR)"
-	@rm -rf $(OBJ_DIR) $(NAME)_debug.a
-	@echo "$(GREEN)Object files cleaned!$(RESET_COLOR)"
+	@echo "$(RED)FT_PRINTF : Cleaning object files in $(OBJ_DIR)...$(RESET_COLOR)"
+	@rm -rf $(OBJ_DIR) debug.a
 
 # Clean everything
 fclean: clean 
-	@echo "$(BLUE)Removing executables...$(RESET_COLOR)"
+	@echo "$(RED)FT_PRINTF : Removing executables...$(RESET_COLOR)"
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT)
-	@echo "$(GREEN)Executables removed!$(RESET_COLOR)"
 
 # Rebuild everything
 re: fclean all
 
 # Norminette target
 norm:
-	@echo "$(BLUE)Running Norminette...$(RESET_COLOR)"
+	@echo "$(BLUE)FT_PRINTF : Running Norminette...$(RESET_COLOR)"
 	norminette $(SRCS)
 	@echo "$(GREEN)Norminette check complete!$(RESET_COLOR)"
 
 # Debug build target
-debug: $(DEBUG_OBJS)
-	@echo "$(YELLOW)Creating debug library $(NAME)_debug.a...$(RESET_COLOR)"
-	@$(AR) rcs $(NAME)_debug.a $(DEBUG_OBJS)
-	@echo "$(GREEN)Debug library $(NAME)_debug.a created!$(RESET_COLOR)"
+debug: $(DEBUG_OBJS) | $(OBJ_DIR)
+	@echo "$(YELLOW)FT_PRINTF : Creating debug library debug.a...$(RESET_COLOR)"
+	@$(AR) rcs debug.a $(DEBUG_OBJS)
+	@echo "$(GREEN)Debug library debug.a created!$(RESET_COLOR)"
 
 # Version targets for different builds
 v1: 
