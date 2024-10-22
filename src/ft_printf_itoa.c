@@ -6,13 +6,13 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:49:14 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 12:54:56 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/22 12:55:18 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static char	*ft_num_to_str(long num, char *str, size_t len);
+static char		*ft_num_to_str(long num, char *str, size_t len);
 static size_t	ft_itoa_len(long num);
 
 static size_t	ft_itoa_len(long num)
