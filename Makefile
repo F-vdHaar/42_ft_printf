@@ -6,7 +6,7 @@
 #    By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
-#    Updated: 2024/10/22 20:40:26 by fvon-de          ###   ########.fr        #
+#    Updated: 2024/10/22 21:22:37 by fvon-de          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,7 +128,7 @@ re: fclean all
 # Norminette target
 norm:
 	@echo "$(BLUE)FT_PRINTF : Running Norminette...$(RESET_COLOR)"
-	norminette $(SRCS)
+	@norminette $(SRCS) | grep -v 'OK!' || true
 	@echo "$(GREEN)Norminette check complete!$(RESET_COLOR)"
 
 # Debug build target

@@ -6,13 +6,13 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:48:08 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 19:06:35 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/22 21:09:17 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/ft_printf.h"
 
-static int	ft_parse_flags(const char *str, int i, va_list args, t_flags *flags);
+static int	ft_parse_flags(const char *s, int i, va_list a, t_flags *f);
 static int	ft_parse(char *str, va_list args);
 
 int	ft_printf(const char *format, ...)
@@ -97,7 +97,7 @@ int	ft_print_arg(char type, va_list args, t_flags flags)
 		count += ft_print_char(va_arg(args, int), flags);
 	else if (type == 's')
 		count += ft_print_str(va_arg(args, const char *), flags);
-    else if (type == 'd' || type == 'i')
+	else if (type == 'd' || type == 'i')
 		count += ft_print_number(va_arg(args, int), flags);
 	else if (type == 'x')
 		count += ft_print_hex_low(va_arg(args, unsigned int), flags);
