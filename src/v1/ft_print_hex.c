@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:54 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 19:23:14 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:18:05 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_print_x_prefix(int is_upper)
 {

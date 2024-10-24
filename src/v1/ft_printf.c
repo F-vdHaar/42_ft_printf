@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:48:08 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 21:09:17 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:19:00 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 static int	ft_parse_flags(const char *s, int i, va_list a, t_flags *f);
 static int	ft_parse(char *str, va_list args);

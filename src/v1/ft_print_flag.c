@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:05:18 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 19:05:17 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:17:55 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_pad_width(int total_width, int size, int zero)
 {

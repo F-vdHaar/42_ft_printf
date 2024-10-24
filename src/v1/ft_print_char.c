@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:10:16 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 19:05:08 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:17:49 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_print_c(char c)
 {

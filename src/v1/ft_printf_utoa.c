@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:49:23 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 19:06:17 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:18:45 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 static size_t	ft_utoa_len(long num)
 {

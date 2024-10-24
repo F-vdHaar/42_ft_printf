@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:56:29 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 21:23:08 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:17:33 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 t_flags	ft_flags_init(void)
 {

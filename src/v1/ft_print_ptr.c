@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:41:19 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 20:40:59 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:18:20 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_print_adr(unsigned long int n)
 {

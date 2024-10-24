@@ -6,11 +6,11 @@
 /*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:37:37 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/22 19:04:59 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:17:42 by fvon-de          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_ptr_len(unsigned long int n)
 {
