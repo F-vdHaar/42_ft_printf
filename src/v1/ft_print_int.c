@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_int.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:22:16 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/24 17:18:10 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/28 19:20:30 by fvon-der         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_print_number(long n, t_flags flags)
 	}
 	nbstr = ft_printf_itoa(nb);
 	if (!nbstr)
-		return (0);
+		return (-1);
 	count += ft_print_integer(nbstr, n, flags);
 	free(nbstr);
 	return (count);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:41:54 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/24 17:18:05 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/28 19:20:48 by fvon-der         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_print_hex_up(unsigned int n, t_flags flags)
 	}
 	nbstr = ft_printf_xtoa(n, 1);
 	if (!nbstr)
-		return (0);
+		return (-1);
 	count += ft_print_hexadec(nbstr, n, 1, flags);
 	free(nbstr);
 	return (count);
@@ -91,7 +91,7 @@ int	ft_print_hex_low(unsigned int n, t_flags flags)
 	}
 	nbstr = ft_printf_xtoa(n, 0);
 	if (!nbstr)
-		return (0);
+		return (-1);
 	count += ft_print_hexadec(nbstr, n, 0, flags);
 	free(nbstr);
 	return (count);

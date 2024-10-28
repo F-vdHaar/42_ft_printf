@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:48:08 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/24 17:19:00 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/28 19:19:39 by fvon-der         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ int	ft_printf(const char *format, ...)
 		return (0);
 	str = ft_strdup(format);
 	if (!str || *str == '\0')
-		return (0);
+		return (-1);
 	count = 0;
 	va_start(args, format);
 	count = ft_parse(str, args);
+	if (count < 0)
+		return (-1);
 	va_end(args);
 	free(str);
 	return (count);
@@ -68,6 +70,7 @@ static int	ft_parse(char *str, va_list args)
 	int		i;
 	int		count;
 	t_flags	flags;
+	int		add;
 
 	i = -1;
 	count = 0;
@@ -78,10 +81,13 @@ static int	ft_parse(char *str, va_list args)
 		{
 			i = ft_parse_flags(str, i, args, &flags);
 			if (str[i] != '\0' && flags.spec > 0 && ft_istype(str[i]))
-				count += ft_print_arg(str[i], args, flags);
+				add = ft_print_arg(str[i], args, flags);
 		}
 		else
-			count += ft_print_c(str[i]);
+			add = ft_print_c(str[i]);
+		if (add < 0)
+			return (-1);
+		count += add;
 	}
 	return (count);
 }

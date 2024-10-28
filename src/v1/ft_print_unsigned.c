@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+        */
+/*   By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:49:05 by fvon-de           #+#    #+#             */
-/*   Updated: 2024/10/24 17:18:32 by fvon-de          ###   ########.fr       */
+/*   Updated: 2024/10/28 19:20:17 by fvon-der         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_print_unsigned(unsigned n, t_flags flags)
 	}
 	nbstr = ft_printf_itoa(n);
 	if (!nbstr)
-		return (0);
+		return (-1);
 	count += ft_print_unint(nbstr, flags);
 	free(nbstr);
 	return (count);
