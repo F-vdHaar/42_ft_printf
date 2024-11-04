@@ -6,7 +6,7 @@
 #    By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
-#    Updated: 2024/10/25 19:22:44 by fvon-der         ###   ########.fr        #
+#    Updated: 2024/11/04 17:02:35 by fvon-der         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RED			= \033[1;31m
 # Project settings
 NAME		= libftprintf.a
 INCLUDE		= include
-LIBFT_DIR	= lib/libft
+LIBFT_DIR	= ../libft
 CC			= cc
 CFLAGS 		= -Wall -Wextra -Werror -Wunused -I$(INCLUDE) -I$(LIBFT_DIR)/$(INCLUDE)
 DEBUG_FLAGS = $(CFLAGS) -g -O0 -fsanitize=address -fsanitize=undefined -fno-strict-aliasing -fno-omit-frame-pointer -fstack-protector -DDEBUG -fno-inline
