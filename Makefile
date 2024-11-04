@@ -6,7 +6,7 @@
 #    By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
-#    Updated: 2024/11/04 17:02:35 by fvon-der         ###   ########.fr        #
+#    Updated: 2024/11/04 17:10:39 by fvon-der         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,7 @@ all: $(NAME) $(LIBFT_DIR)/libft.a
 # Debug build target
 debug: $(DEBUG_OBJS) | $(OBJ_DIR)
 	@echo "$(YELLOW)FT_PRINTF : Creating debug library libdebug.a...$(RESET_COLOR)"
-	@cp $(LIBFT_DIR)/libft.a libdebug.a
-	@$(AR) libdebug.a $(DEBUG_OBJS) $(LIBFT_DIR)/libft.a
+	@$(AR) libdebug.a $(DEBUG_OBJS)
 	@echo "$(GREEN)Debug library libdebug.a created!$(RESET_COLOR)"
 
 test: $(NAME)
@@ -84,8 +83,7 @@ $(LIBFT_DIR)/libft.a:
 #  build rule
 $(NAME):  $(OBJS) $(LIBFT_DIR)/libft.a  | $(OBJ_DIR)
 	@echo "$(YELLOW)FT_PRINTF : Creating library $(NAME)...$(RESET_COLOR)"
-	@cp $(LIBFT_DIR)/libft.a $(NAME)
-	@$(AR) $(NAME) $(OBJS) $(LIBFT_DIR)/libft.a
+	@$(AR) $(NAME) $(OBJS)
 	@echo "$(GREEN)$(NAME) creation finished!$(RESET_COLOR)"
 
 # Rule for building normal object files
