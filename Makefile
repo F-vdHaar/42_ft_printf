@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fvon-de <fvon-der@student.42heilbronn.d    +#+  +:+       +#+         #
+#    By: fvon-der <fvon-der@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:41:34 by fvon-de           #+#    #+#              #
 #    Updated: 2024/10/24 18:59:21 by fvon-de          ###   ########.fr        #
@@ -12,20 +12,26 @@
 
 # Colors for output
 RESET_COLOR = \033[0;39m
-YELLOW      = \033[0;93m
-BLUE        = \033[0;94m
-GREEN       = \033[0;92m
-RED         = \033[1;31m
+YELLOW		= \033[0;93m
+BLUE		= \033[0;94m
+GREEN		= \033[0;92m
+RED			= \033[1;31m
 
 # Project settings
 NAME        = libftprintf.a
 INCLUDE     = include
 LIBFT_DIR   = ../libft
+
 CC			= cc
-CFLAGS 		= -Wall -Wextra -Werror -Wunused -I$(INCLUDE) -I$(LIBFT_DIR)/include 
-DEBUG_FLAGS = $(CFLAGS )-g -O0 -fsanitize=address -fsanitize=undefined -fno-strict-aliasing -fno-omit-frame-pointer -fstack-protector -DDEBUG -fno-inline
-AR          = ar rcs
-MAKE        = make
+CFLAGS 		= -Wall -Wextra -Werror -Wunused -I$(INCLUDE) -I$(LIBFT_DIR)/$(INCLUDE)
+DEBUG_FLAGS = $(CFLAGS) -g -O0 -fsanitize=address -fsanitize=undefined -fno-strict-aliasing -fno-omit-frame-pointer -fstack-protector -DDEBUG -fno-inline
+AR			= ar rcs
+MAKE		= make
+# Linker flags
+# lib<library_name>.a 
+# -lft -> - lib ft , lib is assumed, so the library name is actually ft?
+# this is just necessary for my own tests make test
+LDFLAGS = -L$(LIBFT_DIR) -lft
 
  # Default version if not specified
 VERSION ?= v1
@@ -61,8 +67,11 @@ all: $(NAME) $(LIBFT_DIR)/libft.a
 # Debug build target
 debug: $(DEBUG_OBJS) | $(OBJ_DIR)
 	@echo "$(YELLOW)FT_PRINTF : Creating debug library libdebug.a...$(RESET_COLOR)"
-	@$(AR) libdebug.a $(DEBUG_OBJS) $(LIBFT_DIR)/libft.a 
+	@$(AR) libdebug.a $(DEBUG_OBJS)
 	@echo "$(GREEN)Debug library libdebug.a created!$(RESET_COLOR)"
+
+test: $(NAME)
+	$(CC) tests/printf_tests.c -o test_program -Ilib/libft/include -L. -lftprintf
 
 # Ensure object directory exists
 $(OBJ_DIR):
@@ -75,7 +84,7 @@ $(LIBFT_DIR)/libft.a:
 #  build rule
 $(NAME):  $(OBJS) $(LIBFT_DIR)/libft.a  | $(OBJ_DIR)
 	@echo "$(YELLOW)FT_PRINTF : Creating library $(NAME)...$(RESET_COLOR)"
-	@$(AR) $(NAME) $(OBJS) $(LIBFT_DIR)/libft.a 
+	@$(AR) $(NAME) $(OBJS)
 	@echo "$(GREEN)$(NAME) creation finished!$(RESET_COLOR)"
 
 # Rule for building normal object files
@@ -99,7 +108,7 @@ clean:
 
 # Clean everything
 fclean: clean 
-	@echo "$(RED)FT_PRINTF : Removing executables...$(RESET_COLOR)"
+	@echo "$(RED)FT_PRINTF : Removing library...$(RESET_COLOR)"
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 
