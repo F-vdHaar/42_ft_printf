@@ -15,7 +15,7 @@ RESET_COLOR = \033[0;39m
 YELLOW		= \033[0;93m
 BLUE		= \033[0;94m
 GREEN		= \033[0;92m
-RED			= \033[1;31m
+RED		= \033[1;31m
 
 # Project settings
 NAME        = libftprintf.a
